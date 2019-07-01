@@ -1,1 +1,5 @@
 RickAndMortyApp/RickAndMortyApp.xcodeproj/project.xcworkspace/xcuserdata
+RickAndMortyApp/node_modules
+RickAndMortyApp/Pods/Pods.xcodeproj/xcuserdata
+RickAndMortyApp/Pods
+RickAndMortyApp/RickAndMortyApp.xcworkspace/xcuserdata
