@@ -6,17 +6,30 @@
 //  Copyright © 2019 Joakim Back. All rights reserved.
 //
 
+import Apollo
 import Foundation
 import Kingfisher
+import PromiseKit
 import UIKit
 
 class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var originLabel: UILabel!
+    @IBOutlet weak var originButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
     
     var character: CharacterDetails!
+    var selectedLocation: LocationDetails!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let destination = segue.destination as? LocationDetailsViewController {
+            destination.location = selectedLocation
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +42,41 @@ class CharacterDetailsViewController: UIViewController {
         
         nameLabel.text = character.name
         originLabel.text = character.origin?.name
+        originButton.isEnabled = character.origin?.id != nil
         locationLabel.text = character.location?.name
+        locationButton.isEnabled = character.location?.id != nil
+    }
+    
+    @IBAction func displayOrigin(_ sender: Any) {
+        guard let locationID = character.origin?.id else {
+            return
+        }
+        
+        displayLocation(with: locationID)
+    }
+    
+    @IBAction func displayLocation(_ sender: Any) {
+        guard let locationID = character.location?.id else {
+            return
+        }
+        
+        displayLocation(with: locationID)
+    }
+}
+
+extension CharacterDetailsViewController {
+    private func displayLocation(with id: GraphQLID) {
+        firstly {
+            Service.shared.fetchLocation(id: id)
+        }.done {
+            guard let locationID = $0 else {
+                return
+            }
+            
+            self.selectedLocation = locationID
+            self.performSegue(withIdentifier: "LocationDetailsSegue", sender: nil)
+        }.catch { _ in
+            // Handle error
+        }
     }
 }

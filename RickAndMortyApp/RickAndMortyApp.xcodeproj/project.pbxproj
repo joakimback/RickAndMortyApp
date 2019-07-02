@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		06969EDD0A602017D6EE5439 /* Pods_RickAndMortyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12030CEC524ACAB51DE83791 /* Pods_RickAndMortyAppUITests.framework */; };
 		5612D4ED22CBAF4500D6C3F8 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612D4EC22CBAF4500D6C3F8 /* Views.swift */; };
-		5696605122CB8CEA00A71551 /* UICollectionViewFlowLayout+Rick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696605022CB8CEA00A71551 /* UICollectionViewFlowLayout+Rick.swift */; };
+		569BFC4022CBB5F6002FC78D /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC3F22CBB5F6002FC78D /* LocationDetailsViewController.swift */; };
+		569BFC4322CBC308002FC78D /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4222CBC308002FC78D /* CharacterCell.swift */; };
 		569D179E22CA7C8A005259A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D179D22CA7C8A005259A2 /* AppDelegate.swift */; };
-		569D17A022CA7C8A005259A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D179F22CA7C8A005259A2 /* ViewController.swift */; };
+		569D17A022CA7C8A005259A2 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D179F22CA7C8A005259A2 /* CharactersViewController.swift */; };
 		569D17A322CA7C8A005259A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569D17A122CA7C8A005259A2 /* Main.storyboard */; };
 		569D17A522CA7C8B005259A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 569D17A422CA7C8B005259A2 /* Assets.xcassets */; };
 		569D17A822CA7C8B005259A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569D17A622CA7C8B005259A2 /* LaunchScreen.storyboard */; };
@@ -51,10 +52,11 @@
 		3499ABABC4E7156156315769 /* Pods-RickAndMortyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMortyApp.release.xcconfig"; path = "Target Support Files/Pods-RickAndMortyApp/Pods-RickAndMortyApp.release.xcconfig"; sourceTree = "<group>"; };
 		416ABC9E055E471BA1D543AB /* Pods-RickAndMortyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMortyAppTests.release.xcconfig"; path = "Target Support Files/Pods-RickAndMortyAppTests/Pods-RickAndMortyAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5612D4EC22CBAF4500D6C3F8 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		5696605022CB8CEA00A71551 /* UICollectionViewFlowLayout+Rick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Rick.swift"; sourceTree = "<group>"; };
+		569BFC3F22CBB5F6002FC78D /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		569BFC4222CBC308002FC78D /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		569D179A22CA7C8A005259A2 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		569D179D22CA7C8A005259A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		569D179F22CA7C8A005259A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		569D179F22CA7C8A005259A2 /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
 		569D17A222CA7C8A005259A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		569D17A422CA7C8B005259A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		569D17A722CA7C8B005259A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,6 +116,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		569BFC4122CBC2F5002FC78D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				569BFC4222CBC308002FC78D /* CharacterCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		569D179122CA7C8A005259A2 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		569D179C22CA7C8A005259A2 /* RickAndMortyApp */ = {
 			isa = PBXGroup;
 			children = (
+				569BFC4122CBC2F5002FC78D /* Cells */,
 				5612D4EB22CBAF2F00D6C3F8 /* Views */,
 				569D17E022CB8C51005259A2 /* Extensions */,
 				569D17D422CA86A7005259A2 /* api.graphql */,
@@ -147,8 +158,9 @@
 				569D17CF22CA850D005259A2 /* API.swift */,
 				569D17D722CA886A005259A2 /* Service.swift */,
 				569D179D22CA7C8A005259A2 /* AppDelegate.swift */,
-				569D179F22CA7C8A005259A2 /* ViewController.swift */,
+				569D179F22CA7C8A005259A2 /* CharactersViewController.swift */,
 				569D17DC22CB81BD005259A2 /* CharacterDetailsViewController.swift */,
+				569BFC3F22CBB5F6002FC78D /* LocationDetailsViewController.swift */,
 				569D17A122CA7C8A005259A2 /* Main.storyboard */,
 				569D17A422CA7C8B005259A2 /* Assets.xcassets */,
 				569D17A622CA7C8B005259A2 /* LaunchScreen.storyboard */,
@@ -179,7 +191,6 @@
 		569D17E022CB8C51005259A2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5696605022CB8CEA00A71551 /* UICollectionViewFlowLayout+Rick.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -458,11 +469,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				569D17D822CA886A005259A2 /* Service.swift in Sources */,
-				569D17A022CA7C8A005259A2 /* ViewController.swift in Sources */,
+				569D17A022CA7C8A005259A2 /* CharactersViewController.swift in Sources */,
 				569D17DD22CB81BD005259A2 /* CharacterDetailsViewController.swift in Sources */,
+				569BFC4322CBC308002FC78D /* CharacterCell.swift in Sources */,
 				569D17D022CA850D005259A2 /* API.swift in Sources */,
+				569BFC4022CBB5F6002FC78D /* LocationDetailsViewController.swift in Sources */,
 				5612D4ED22CBAF4500D6C3F8 /* Views.swift in Sources */,
-				5696605122CB8CEA00A71551 /* UICollectionViewFlowLayout+Rick.swift in Sources */,
 				569D179E22CA7C8A005259A2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

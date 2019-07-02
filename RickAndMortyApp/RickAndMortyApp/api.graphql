@@ -4,7 +4,7 @@ fragment LocationDetails on Location {
     type
     dimension
     residents {
-        ...CharacterDetails
+        id
     }
 }
 
@@ -28,5 +28,11 @@ query FetchCharacters($page: Int = 1) {
         results {
             ...CharacterDetails
         }
+    }
+}
+
+query FetchLocation($id: ID = 1) {
+    location(id: $id) {
+        ...LocationDetails
     }
 }

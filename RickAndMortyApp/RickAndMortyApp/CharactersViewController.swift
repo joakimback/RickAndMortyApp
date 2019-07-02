@@ -10,36 +10,6 @@ import Kingfisher
 import UIKit
 import PromiseKit
 
-class CharacterCell: UITableViewCell {
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var iconView: UIImageView!
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        iconView.kf.cancelDownloadTask()
-    }
-    
-    func configure(for character: CharacterDetails) {
-        nameLabel.text = character.name
-        
-        if let url = character.imageURL {
-            iconView.kf.setImage(with: url)
-        } else {
-            iconView.image = nil
-        }
-    }
-}
-
-extension CharacterDetails {
-    var imageURL: URL? {
-        guard let image = image else {
-            return nil
-        }
-        
-        return URL(string: image)
-    }
-}
-
 class CharactersViewController: UITableViewController {
     var characters: [CharacterDetails] = []
     var isLoading = false

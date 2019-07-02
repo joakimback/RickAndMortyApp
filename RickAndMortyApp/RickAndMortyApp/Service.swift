@@ -43,4 +43,19 @@ class Service {
             }
         }
     }
+    
+    func fetchLocation(id: GraphQLID) -> PromiseKit.Promise<LocationDetails?> {
+        return PromiseKit.Promise { resolver in
+            let query = FetchLocationQuery(id: id)
+            apollo.fetch(query: query) { (result, error) in
+                if let error = error {
+                    resolver.reject(error)
+                    return
+                }
+                
+                let location = result?.data?.location
+                resolver.fulfill(location?.fragments.locationDetails)
+            }
+        }
+    }
 }

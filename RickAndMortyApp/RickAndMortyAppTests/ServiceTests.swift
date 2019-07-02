@@ -25,12 +25,28 @@ class ServiceTests: XCTestCase {
         
         firstly {
             Service.shared.fetchCharacters(for: 1)
-        }.done {
-            XCTAssert($0.count > 0)
-        }.catch { _ in
-            XCTFail("Unable to find characters")
-        }.finally {
-            e.fulfill()
+            }.done {
+                XCTAssert($0.count > 0)
+            }.catch { _ in
+                XCTFail("Unable to find characters")
+            }.finally {
+                e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testFetchLocation() {
+        let e = expectation(description: "")
+        
+        firstly {
+            Service.shared.fetchLocation(id: 1)
+            }.done {
+                XCTAssertNotNil($0)
+            }.catch { _ in
+                XCTFail("Unable to fetch location")
+            }.finally {
+                e.fulfill()
         }
         
         waitForExpectations(timeout: 10.0, handler: nil)
