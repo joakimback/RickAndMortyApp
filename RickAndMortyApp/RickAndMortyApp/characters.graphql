@@ -1,6 +1,14 @@
 fragment CharacterDetails on Character {
     image
     name
+    species
+    gender
+    origin {
+        name
+    }
+    location {
+        name
+    }
 }
 
 query FetchCharacters($page: Int = 1) {

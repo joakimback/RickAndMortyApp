@@ -95,10 +95,6 @@ public final class FetchCharactersQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(image: String? = nil, name: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Character", "image": image, "name": name])
-        }
-
         public var __typename: String {
           get {
             return resultMap["__typename"]! as! String
@@ -140,7 +136,7 @@ public final class FetchCharactersQuery: GraphQLQuery {
 
 public struct CharacterDetails: GraphQLFragment {
   public static let fragmentDefinition =
-    "fragment CharacterDetails on Character {\n  __typename\n  image\n  name\n}"
+    "fragment CharacterDetails on Character {\n  __typename\n  image\n  name\n  species\n  gender\n  origin {\n    __typename\n    name\n  }\n  location {\n    __typename\n    name\n  }\n}"
 
   public static let possibleTypes = ["Character"]
 
@@ -148,6 +144,10 @@ public struct CharacterDetails: GraphQLFragment {
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
     GraphQLField("image", type: .scalar(String.self)),
     GraphQLField("name", type: .scalar(String.self)),
+    GraphQLField("species", type: .scalar(String.self)),
+    GraphQLField("gender", type: .scalar(String.self)),
+    GraphQLField("origin", type: .object(Origin.selections)),
+    GraphQLField("location", type: .object(Location.selections)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -156,8 +156,8 @@ public struct CharacterDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(image: String? = nil, name: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Character", "image": image, "name": name])
+  public init(image: String? = nil, name: String? = nil, species: String? = nil, gender: String? = nil, origin: Origin? = nil, location: Location? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Character", "image": image, "name": name, "species": species, "gender": gender, "origin": origin.flatMap { (value: Origin) -> ResultMap in value.resultMap }, "location": location.flatMap { (value: Location) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -187,6 +187,122 @@ public struct CharacterDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  /// The species of the character.
+  public var species: String? {
+    get {
+      return resultMap["species"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "species")
+    }
+  }
+
+  /// The gender of the character ('Female', 'Male', 'Genderless' or 'unknown').
+  public var gender: String? {
+    get {
+      return resultMap["gender"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "gender")
+    }
+  }
+
+  /// The character's origin location
+  public var origin: Origin? {
+    get {
+      return (resultMap["origin"] as? ResultMap).flatMap { Origin(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "origin")
+    }
+  }
+
+  /// The character's last known location
+  public var location: Location? {
+    get {
+      return (resultMap["location"] as? ResultMap).flatMap { Location(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "location")
+    }
+  }
+
+  public struct Origin: GraphQLSelectionSet {
+    public static let possibleTypes = ["Location"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .scalar(String.self)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(name: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Location", "name": name])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// The name of the location.
+    public var name: String? {
+      get {
+        return resultMap["name"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+  }
+
+  public struct Location: GraphQLSelectionSet {
+    public static let possibleTypes = ["Location"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .scalar(String.self)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(name: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Location", "name": name])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// The name of the location.
+    public var name: String? {
+      get {
+        return resultMap["name"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
     }
   }
 }
