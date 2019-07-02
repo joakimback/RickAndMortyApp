@@ -8,6 +8,7 @@ target 'RickAndMortyApp' do
   # Pods for RickAndMortyApp
   pod "Apollo"
   pod "PromiseKit"
+  pod "Kingfisher"
 
   target 'RickAndMortyAppTests' do
     inherit! :search_paths

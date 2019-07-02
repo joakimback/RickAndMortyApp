@@ -1,0 +1,32 @@
+fragment LocationDetails on Location {
+    id
+    name
+    type
+    dimension
+    residents {
+        ...CharacterDetails
+    }
+}
+
+fragment CharacterDetails on Character {
+    image
+    name
+    species
+    gender
+    origin {
+        id
+        name
+    }
+    location {
+        id
+        name
+    }
+}
+
+query FetchCharacters($page: Int = 1) {
+    characters(page: $page) {
+        results {
+            ...CharacterDetails
+        }
+    }
+}
