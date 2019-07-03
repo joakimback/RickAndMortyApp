@@ -28,7 +28,7 @@ class ServiceTests: XCTestCase {
             }.done {
                 XCTAssert($0.count > 0)
             }.catch { _ in
-                XCTFail("Unable to find characters")
+                XCTFail("Unable to fetch characters")
             }.finally {
                 e.fulfill()
         }
@@ -60,7 +60,23 @@ class ServiceTests: XCTestCase {
             }.done {
                 XCTAssertTrue($0.count > 0)
             }.catch { _ in
-                XCTFail("Unable to fetch location")
+                XCTFail("Unable to fetch residents")
+            }.finally {
+                e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testFetchFavorites() {
+        let e = expectation(description: "")
+        
+        firstly {
+            Service.shared.fetchCharacters(for: ["1", "2", "3"])
+            }.done {
+                XCTAssertTrue($0.count ==  3)
+            }.catch { _ in
+                XCTFail("Unable to fetch characters")
             }.finally {
                 e.fulfill()
         }

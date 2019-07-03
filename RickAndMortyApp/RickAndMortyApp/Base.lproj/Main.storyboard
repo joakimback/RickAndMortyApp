@@ -292,6 +292,7 @@
                                                                             </stackView>
                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="100" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUc-8W-2Da">
                                                                                 <rect key="frame" x="273" y="11" width="22" height="22"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="OriginButton"/>
                                                                                 <connections>
                                                                                     <action selector="displayOrigin:" destination="2ml-Jr-BU4" eventType="primaryActionTriggered" id="Sff-Vk-2hx"/>
                                                                                 </connections>
@@ -323,6 +324,7 @@
                                                                             </stackView>
                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="100" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfO-Js-sTc">
                                                                                 <rect key="frame" x="273" y="11" width="22" height="22"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="LocationButton"/>
                                                                                 <connections>
                                                                                     <action selector="displayLocation:" destination="2ml-Jr-BU4" eventType="primaryActionTriggered" id="LJA-z2-1hI"/>
                                                                                 </connections>
@@ -393,7 +395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUL-HF-mAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1440.8" y="-313.30049261083747"/>
+            <point key="canvasLocation" x="1452" y="-4"/>
         </scene>
         <!--Location Details View Controller-->
         <scene sceneID="dFF-A7-VRj">

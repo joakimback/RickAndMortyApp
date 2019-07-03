@@ -20,11 +20,15 @@ class FavoritesController {
     
     func add(id: GraphQLID) {
         favorites.append(id)
+        
+        // Notify observers
         NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
     
     func remove(id: GraphQLID) {
         favorites = favorites.filter { $0 != id }
+
+        // Notify observers
         NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
     

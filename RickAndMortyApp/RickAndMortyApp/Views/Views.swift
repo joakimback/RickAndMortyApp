@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class CardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -18,6 +19,7 @@ class CardView: UIView {
     }
 }
 
+@IBDesignable
 class ShadowView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -29,11 +31,12 @@ class ShadowView: UIView {
     }
 }
 
+@IBDesignable
 class IconView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        backgroundColor = .lightGray
+        backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         layer.cornerRadius = 4.0
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 0.5
