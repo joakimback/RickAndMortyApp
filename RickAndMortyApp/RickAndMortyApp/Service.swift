@@ -21,10 +21,12 @@ class Service {
         apollo = ApolloClient(url: url)
     }
     
-    func fetchCharacters(for page: Int) -> PromiseKit.Promise<[CharacterDetails]> {
+    func fetchCharacters(for page: Int, ignoreCache: Bool = false) -> PromiseKit.Promise<[CharacterDetails]> {
+        let cachePolicy: CachePolicy = ignoreCache ? .fetchIgnoringCacheData: .returnCacheDataElseFetch
+        
         return PromiseKit.Promise { resolver in
             let query = FetchCharactersQuery(page: page)
-            apollo.fetch(query: query) { (result, error) in
+            apollo.fetch(query: query, cachePolicy: cachePolicy) { (result, error) in
                 if let error = error {
                     resolver.reject(error)
                     return
@@ -77,4 +79,36 @@ class Service {
             }
         }
     }
+    
+    func fetchCharacter(for id: GraphQLID) -> PromiseKit.Promise<CharacterDetails> {
+        return PromiseKit.Promise { resolver in
+            let query = FetchCharacterQuery(id: id)
+            apollo.fetch(query: query) { (result, error) in
+                if let error = error {
+                    resolver.reject(error)
+                    return
+                }
+                
+                guard let character = result?.data?.character?.fragments.characterDetails else {
+                    resolver.reject(ServiceError.runtimeError("Fetching favorites failed"))
+                    return
+                }
+                
+                resolver.fulfill(character)
+            }
+        }
+    }
+    
+    func fetchCharacters(for ids: [GraphQLID]) -> PromiseKit.Promise<[CharacterDetails]> {
+        let promises = ids.map {
+            fetchCharacter(for: $0)
+        }
+        
+        return when(fulfilled: promises)
+    }
 }
+
+enum ServiceError: Error {
+    case runtimeError(String)
+}
+

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Favorites-->
         <scene sceneID="9xx-Xi-hac">
             <objects>
-                <tableViewController id="Gdr-MN-lHw" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="Gdr-MN-lHw" customClass="FavoritesViewController" customModule="RickAndMortyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kzy-ig-JfB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,7 +69,7 @@
                             <outlet property="delegate" destination="Gdr-MN-lHw" id="DSA-rq-WCJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="F1D-Cn-JJ7"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="F1D-Cn-JJ7"/>
                     <connections>
                         <segue destination="2ml-Jr-BU4" kind="show" identifier="CharacterDetailsSegue" id="RFX-QY-4TQ"/>
                     </connections>
@@ -157,7 +157,7 @@
         <scene sceneID="pGi-Cl-kQU">
             <objects>
                 <navigationController id="Kmh-HQ-aCv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" id="43U-lH-tKG"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="726-star" selectedImage="726-star-selected" id="43U-lH-tKG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Rb-QP-y02">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -238,7 +238,7 @@
             </objects>
             <point key="canvasLocation" x="492" y="-313.30049261083747"/>
         </scene>
-        <!--Character Details View Controller-->
+        <!--Character-->
         <scene sceneID="ws7-Us-yOt">
             <objects>
                 <viewController storyboardIdentifier="CharacterDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2ml-Jr-BU4" customClass="CharacterDetailsViewController" customModule="RickAndMortyApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -373,7 +373,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m5d-8z-U55"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Character" id="Al1-hx-7Rs">
+                        <barButtonItem key="rightBarButtonItem" image="726-star" id="3gO-eC-oxV">
+                            <connections>
+                                <action selector="toggleFavorite:" destination="2ml-Jr-BU4" id="q4S-52-63a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="favoriteButton" destination="3gO-eC-oxV" id="pdl-7O-JgC"/>
                         <outlet property="imageView" destination="83k-zf-2F4" id="I1P-up-su7"/>
                         <outlet property="locationButton" destination="wfO-Js-sTc" id="Vj2-cL-HgP"/>
                         <outlet property="locationLabel" destination="nvk-n6-oZo" id="zjV-lw-E57"/>
@@ -518,7 +526,7 @@
         <scene sceneID="9l3-3l-QdE">
             <objects>
                 <navigationController id="AoP-H9-yVO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Characters" id="ZpG-eC-Ykf"/>
+                    <tabBarItem key="tabBarItem" title="Characters" image="895-user-group" selectedImage="895-user-group-selected" id="ZpG-eC-Ykf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oez-I3-8yU">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -550,7 +558,13 @@
             <point key="canvasLocation" x="-1418" y="-3"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="726-star" width="28" height="26"/>
+        <image name="726-star-selected" width="28" height="26"/>
+        <image name="895-user-group" width="29" height="20"/>
+        <image name="895-user-group-selected" width="29" height="20"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RFX-QY-4TQ"/>
+        <segue reference="BVW-25-YoF"/>
     </inferredMetricsTieBreakers>
 </document>

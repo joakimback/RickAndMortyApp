@@ -9,6 +9,10 @@
 import Apollo
 import Foundation
 
+extension Notification.Name {
+    static let favoritesDidChange = Notification.Name("favoritesDidChange")
+}
+
 class FavoritesController {
     static let shared = FavoritesController()
     
@@ -16,10 +20,12 @@ class FavoritesController {
     
     func add(id: GraphQLID) {
         favorites.append(id)
+        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
     
     func remove(id: GraphQLID) {
         favorites = favorites.filter { $0 != id }
+        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
     
     func contains(id: GraphQLID) -> Bool {

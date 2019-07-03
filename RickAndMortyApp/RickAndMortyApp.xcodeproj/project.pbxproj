@@ -160,7 +160,6 @@
 			children = (
 				569BFC4122CBC2F5002FC78D /* Cells */,
 				5612D4EB22CBAF2F00D6C3F8 /* Views */,
-				569D17E022CB8C51005259A2 /* Extensions */,
 				569D17D422CA86A7005259A2 /* api.graphql */,
 				569D17D322CA86A7005259A2 /* schema.json */,
 				569D17CF22CA850D005259A2 /* API.swift */,
@@ -170,13 +169,13 @@
 				569BFC4422CBD194002FC78D /* AbstractCharactersViewController.swift */,
 				569D179F22CA7C8A005259A2 /* CharactersViewController.swift */,
 				569D17DC22CB81BD005259A2 /* CharacterDetailsViewController.swift */,
+				569BFC4822CD18AF002FC78D /* FavoritesViewController.swift */,
 				569BFC3F22CBB5F6002FC78D /* LocationDetailsViewController.swift */,
 				569BFC4622CBD2B4002FC78D /* ResidentsViewController.swift */,
 				569D17A122CA7C8A005259A2 /* Main.storyboard */,
 				569D17A422CA7C8B005259A2 /* Assets.xcassets */,
 				569D17A622CA7C8B005259A2 /* LaunchScreen.storyboard */,
 				569D17A922CA7C8B005259A2 /* Info.plist */,
-				569BFC4822CD18AF002FC78D /* FavoritesViewController.swift */,
 			);
 			path = RickAndMortyApp;
 			sourceTree = "<group>";
@@ -198,13 +197,6 @@
 				569D17BF22CA7C8B005259A2 /* Info.plist */,
 			);
 			path = RickAndMortyAppUITests;
-			sourceTree = "<group>";
-		};
-		569D17E022CB8C51005259A2 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AC1D3F9119F03977012CC428 /* Frameworks */ = {

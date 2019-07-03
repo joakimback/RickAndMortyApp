@@ -15,6 +15,7 @@ fragment LocationResidents on Location {
 }
 
 fragment CharacterDetails on Character {
+    id
     image
     name
     species
@@ -34,6 +35,12 @@ query FetchCharacters($page: Int = 1) {
         results {
             ...CharacterDetails
         }
+    }
+}
+
+query FetchCharacter($id: ID = 1) {
+    character(id: $id) {
+        ...CharacterDetails
     }
 }
 

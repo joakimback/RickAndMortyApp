@@ -134,6 +134,101 @@ public final class FetchCharactersQuery: GraphQLQuery {
   }
 }
 
+public final class FetchCharacterQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query FetchCharacter($id: ID = 1) {\n  character(id: $id) {\n    __typename\n    ...CharacterDetails\n  }\n}"
+
+  public var queryDocument: String { return operationDefinition.appending(CharacterDetails.fragmentDefinition) }
+
+  public var id: GraphQLID?
+
+  public init(id: GraphQLID? = nil) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("character", arguments: ["id": GraphQLVariable("id")], type: .object(Character.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(character: Character? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "character": character.flatMap { (value: Character) -> ResultMap in value.resultMap }])
+    }
+
+    /// Get a specific character by ID
+    public var character: Character? {
+      get {
+        return (resultMap["character"] as? ResultMap).flatMap { Character(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "character")
+      }
+    }
+
+    public struct Character: GraphQLSelectionSet {
+      public static let possibleTypes = ["Character"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(CharacterDetails.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var characterDetails: CharacterDetails {
+          get {
+            return CharacterDetails(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
 public final class FetchLocationQuery: GraphQLQuery {
   public let operationDefinition =
     "query FetchLocation($id: ID = 1) {\n  location(id: $id) {\n    __typename\n    ...LocationDetails\n  }\n}"
@@ -540,12 +635,13 @@ public struct LocationResidents: GraphQLFragment {
 
 public struct CharacterDetails: GraphQLFragment {
   public static let fragmentDefinition =
-    "fragment CharacterDetails on Character {\n  __typename\n  image\n  name\n  species\n  gender\n  origin {\n    __typename\n    id\n    name\n  }\n  location {\n    __typename\n    id\n    name\n  }\n}"
+    "fragment CharacterDetails on Character {\n  __typename\n  id\n  image\n  name\n  species\n  gender\n  origin {\n    __typename\n    id\n    name\n  }\n  location {\n    __typename\n    id\n    name\n  }\n}"
 
   public static let possibleTypes = ["Character"]
 
   public static let selections: [GraphQLSelection] = [
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("id", type: .scalar(GraphQLID.self)),
     GraphQLField("image", type: .scalar(String.self)),
     GraphQLField("name", type: .scalar(String.self)),
     GraphQLField("species", type: .scalar(String.self)),
@@ -560,8 +656,8 @@ public struct CharacterDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(image: String? = nil, name: String? = nil, species: String? = nil, gender: String? = nil, origin: Origin? = nil, location: Location? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Character", "image": image, "name": name, "species": species, "gender": gender, "origin": origin.flatMap { (value: Origin) -> ResultMap in value.resultMap }, "location": location.flatMap { (value: Location) -> ResultMap in value.resultMap }])
+  public init(id: GraphQLID? = nil, image: String? = nil, name: String? = nil, species: String? = nil, gender: String? = nil, origin: Origin? = nil, location: Location? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Character", "id": id, "image": image, "name": name, "species": species, "gender": gender, "origin": origin.flatMap { (value: Origin) -> ResultMap in value.resultMap }, "location": location.flatMap { (value: Location) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -570,6 +666,16 @@ public struct CharacterDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The id of the character.
+  public var id: GraphQLID? {
+    get {
+      return resultMap["id"] as? GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
     }
   }
 

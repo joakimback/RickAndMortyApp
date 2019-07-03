@@ -19,6 +19,7 @@ class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var originButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
     var character: CharacterDetails!
     var selectedLocation: LocationDetails!
@@ -47,6 +48,11 @@ class CharacterDetailsViewController: UIViewController {
         locationButton.isEnabled = character.location?.id != nil
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateFavoriteButton()
+    }
+    
     @IBAction func displayOrigin(_ sender: Any) {
         guard let locationID = character.origin?.id else {
             return
@@ -61,6 +67,20 @@ class CharacterDetailsViewController: UIViewController {
         }
         
         displayLocation(with: locationID)
+    }
+    
+    @IBAction func toggleFavorite(_ sender: Any) {
+        guard let characterID = character.id else {
+            return
+        }
+        
+        if (FavoritesController.shared.contains(id: characterID)) {
+            FavoritesController.shared.remove(id: characterID)
+        } else {
+            FavoritesController.shared.add(id: characterID)
+        }
+        
+        updateFavoriteButton()
     }
 }
 
@@ -77,6 +97,18 @@ extension CharacterDetailsViewController {
             self.performSegue(withIdentifier: "LocationDetailsSegue", sender: nil)
         }.catch { _ in
             // Handle error
+        }
+    }
+    
+    private func updateFavoriteButton() {
+        guard let characterID = character.id else {
+            return
+        }
+        
+        if (FavoritesController.shared.contains(id: characterID)) {
+            favoriteButton.image = #imageLiteral(resourceName: "726-star-selected")
+        } else {
+            favoriteButton.image = #imageLiteral(resourceName: "726-star")
         }
     }
 }
