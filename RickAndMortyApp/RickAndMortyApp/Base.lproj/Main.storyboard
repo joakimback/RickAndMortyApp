@@ -18,14 +18,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Ryl-6b-a47">
+                            <rect key="frame" x="0.0" y="104" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sDf-l7-jdZ">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CharacterCell" rowHeight="76" id="d0D-Rc-2BG" customClass="CharacterCell" customModule="RickAndMortyApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDf-l7-jdZ" id="RKy-Pl-pb5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d0D-Rc-2BG" id="Tdu-mp-XK3">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="75.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvJ-xV-pZP">
+                                            <rect key="frame" x="20" y="4" width="301" height="67.666666666666671"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ia2-Pz-kAl" customClass="IconView" customModule="RickAndMortyApp" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="2" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="6wA-IK-3cR"/>
+                                                        <constraint firstAttribute="width" secondItem="ia2-Pz-kAl" secondAttribute="height" multiplier="1:1" id="WT3-1z-NMq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKK-Xb-x7l">
+                                                    <rect key="frame" x="74" y="22" width="227" height="24"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gvJ-xV-pZP" firstAttribute="top" secondItem="Tdu-mp-XK3" secondAttribute="top" priority="100" constant="4" id="EYz-yC-zvQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="gvJ-xV-pZP" secondAttribute="trailing" constant="20" symbolic="YES" id="Hz7-Sd-9UY"/>
+                                        <constraint firstAttribute="bottom" secondItem="gvJ-xV-pZP" secondAttribute="bottom" priority="100" constant="4" id="VNe-eW-r6I"/>
+                                        <constraint firstItem="gvJ-xV-pZP" firstAttribute="centerY" secondItem="Tdu-mp-XK3" secondAttribute="centerY" id="csb-5P-fK2"/>
+                                        <constraint firstItem="gvJ-xV-pZP" firstAttribute="leading" secondItem="Tdu-mp-XK3" secondAttribute="leading" constant="20" symbolic="YES" id="lgh-IQ-azA"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconView" destination="ia2-Pz-kAl" id="i54-S1-k4T"/>
+                                    <outlet property="nameLabel" destination="CKK-Xb-x7l" id="cSI-bX-sb6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -34,10 +70,88 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="F1D-Cn-JJ7"/>
+                    <connections>
+                        <segue destination="2ml-Jr-BU4" kind="show" identifier="CharacterDetailsSegue" id="RFX-QY-4TQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgI-HZ-gOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="493" y="378"/>
+        </scene>
+        <!--Residents-->
+        <scene sceneID="fSE-fu-HRZ">
+            <objects>
+                <tableViewController title="Residents" id="Tfz-ne-WxF" customClass="ResidentsViewController" customModule="RickAndMortyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YOD-HB-8TP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="W2k-f9-e3h">
+                            <rect key="frame" x="0.0" y="104" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CharacterCell" rowHeight="76" id="aEV-Gh-J2d" customClass="CharacterCell" customModule="RickAndMortyApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="76"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aEV-Gh-J2d" id="HpB-bP-Yh0">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="75.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lge-y8-iCh">
+                                            <rect key="frame" x="20" y="4" width="301" height="67.666666666666671"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h2o-yS-G1N" customClass="IconView" customModule="RickAndMortyApp" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="2" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="h2o-yS-G1N" secondAttribute="height" multiplier="1:1" id="4UA-QC-3ah"/>
+                                                        <constraint firstAttribute="width" constant="64" id="Ud0-DP-s2q"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiI-7N-Mfp">
+                                                    <rect key="frame" x="74" y="22" width="227" height="24"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="lge-y8-iCh" secondAttribute="trailing" constant="20" symbolic="YES" id="D6G-wu-izd"/>
+                                        <constraint firstItem="lge-y8-iCh" firstAttribute="top" secondItem="HpB-bP-Yh0" secondAttribute="top" priority="100" constant="4" id="NHg-rr-DK3"/>
+                                        <constraint firstItem="lge-y8-iCh" firstAttribute="centerY" secondItem="HpB-bP-Yh0" secondAttribute="centerY" id="YmR-Zz-Hc5"/>
+                                        <constraint firstItem="lge-y8-iCh" firstAttribute="leading" secondItem="HpB-bP-Yh0" secondAttribute="leading" constant="20" symbolic="YES" id="gsT-IG-3Pn"/>
+                                        <constraint firstAttribute="bottom" secondItem="lge-y8-iCh" secondAttribute="bottom" priority="100" constant="4" id="vjd-hN-6HE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconView" destination="h2o-yS-G1N" id="jrg-Pw-lqb"/>
+                                    <outlet property="nameLabel" destination="JiI-7N-Mfp" id="cIS-Y3-2Hq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Tfz-ne-WxF" id="yT9-Y9-eW2"/>
+                            <outlet property="delegate" destination="Tfz-ne-WxF" id="nbF-hb-wl4"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="poE-78-8EV" kind="show" identifier="CharacterDetailsSegue" id="kUA-0d-ff5"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JPp-Iy-eMh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2306" y="378"/>
+        </scene>
+        <!--CharacterDetails-->
+        <scene sceneID="4pC-34-peO">
+            <objects>
+                <viewControllerPlaceholder referencedIdentifier="CharacterDetails" id="poE-78-8EV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rrm-PM-tGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2305" y="754"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="pGi-Cl-kQU">
@@ -64,6 +178,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="yR3-J1-kdC">
+                            <rect key="frame" x="0.0" y="104" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CharacterCell" rowHeight="76" id="LCY-gq-0Sb" customClass="CharacterCell" customModule="RickAndMortyApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="76"/>
@@ -122,7 +241,7 @@
         <!--Character Details View Controller-->
         <scene sceneID="ws7-Us-yOt">
             <objects>
-                <viewController id="2ml-Jr-BU4" customClass="CharacterDetailsViewController" customModule="RickAndMortyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CharacterDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2ml-Jr-BU4" customClass="CharacterDetailsViewController" customModule="RickAndMortyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="85d-yP-Ghr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +264,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ysm-tA-0JB">
                                                                 <rect key="frame" x="20" y="20" width="295" height="151.33333333333334"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5W-Eh-sKd">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5W-Eh-sKd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="295" height="31.333333333333332"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                         <nil key="textColor"/>
@@ -285,7 +404,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5d7-E9-zLG">
                                                 <rect key="frame" x="20" y="20" width="295" height="195.33333333333334"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh9-IF-Mii">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh9-IF-Mii">
                                                         <rect key="frame" x="0.0" y="0.0" width="295" height="31.333333333333332"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
@@ -325,21 +444,32 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JMB-Ij-hES">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMt-DP-ZCN">
                                                         <rect key="frame" x="0.0" y="156.66666666666669" width="295" height="38.666666666666657"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Residents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcY-Hx-O6D">
-                                                                <rect key="frame" x="0.0" y="0.0" width="295" height="14.333333333333334"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDj-cc-6Sf">
-                                                                <rect key="frame" x="0.0" y="18.333333333333314" width="295" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JMB-Ij-hES">
+                                                                <rect key="frame" x="0.0" y="0.0" width="273" height="38.666666666666664"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Residents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcY-Hx-O6D">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="273" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDj-cc-6Sf">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333314" width="273" height="20.333333333333329"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3X-zm-AHh">
+                                                                <rect key="frame" x="273" y="0.0" width="22" height="38.666666666666664"/>
+                                                                <connections>
+                                                                    <action selector="showResidents:" destination="gaE-yw-0j9" eventType="primaryActionTriggered" id="EkZ-yU-xeH"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -377,11 +507,12 @@
                         <outlet property="nameLabel" destination="yh9-IF-Mii" id="6F4-RL-VUU"/>
                         <outlet property="residentsLabel" destination="uDj-cc-6Sf" id="eYZ-j5-NZJ"/>
                         <outlet property="typeLabel" destination="YT8-lh-Wo6" id="BxS-MK-X4g"/>
+                        <segue destination="Tfz-ne-WxF" kind="show" identifier="ResidentSegue" id="Ni0-TK-Prk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Fo-mL-Ipd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1441" y="378"/>
+            <point key="canvasLocation" x="2306" y="-313"/>
         </scene>
         <!--Characters-->
         <scene sceneID="9l3-3l-QdE">
@@ -419,4 +550,7 @@
             <point key="canvasLocation" x="-1418" y="-3"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="RFX-QY-4TQ"/>
+    </inferredMetricsTieBreakers>
 </document>

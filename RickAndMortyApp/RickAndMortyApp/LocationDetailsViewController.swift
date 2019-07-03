@@ -18,16 +18,18 @@ class LocationDetailsViewController: UIViewController {
     
     var location: LocationDetails!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let destination = segue.destination as? ResidentsViewController {
+            destination.locationID = location.id
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let location = location else {
-            title = nil
-            nameLabel.text = nil
-            typeLabel.text = nil
-            dimensionLabel.text = nil
-            residentsLabel.text = nil
-            
             return
         }
         
@@ -36,5 +38,9 @@ class LocationDetailsViewController: UIViewController {
         typeLabel.text = location.type
         dimensionLabel.text = location.dimension
         residentsLabel.text = (location.residents?.count).map { "\($0)" }
+    }
+    
+    @IBAction func showResidents(_ sender: Any) {
+        performSegue(withIdentifier: "ResidentSegue", sender: nil)
     }
 }

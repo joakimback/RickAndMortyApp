@@ -58,4 +58,23 @@ class Service {
             }
         }
     }
+    
+    func fetchResidents(for id: GraphQLID) -> PromiseKit.Promise<[CharacterDetails]> {
+        return PromiseKit.Promise { resolver in
+            let query = FetchLocationResidentsQuery(id: id)
+            apollo.fetch(query: query) { (result, error) in
+                if let error = error {
+                    resolver.reject(error)
+                    return
+                }
+                
+                guard let residents = result?.data?.location?.fragments.locationResidents.residents else {
+                    resolver.fulfill([])
+                    return
+                }
+                
+                resolver.fulfill(residents.compactMap { $0?.fragments.characterDetails })
+            }
+        }
+    }
 }

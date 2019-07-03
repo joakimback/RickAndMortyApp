@@ -40,9 +40,25 @@ class ServiceTests: XCTestCase {
         let e = expectation(description: "")
         
         firstly {
-            Service.shared.fetchLocation(id: 1)
+            Service.shared.fetchLocation(id: "1")
             }.done {
                 XCTAssertNotNil($0)
+            }.catch { _ in
+                XCTFail("Unable to fetch location")
+            }.finally {
+                e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testFetchResidents() {
+        let e = expectation(description: "")
+        
+        firstly {
+            Service.shared.fetchResidents(for: "1")
+            }.done {
+                XCTAssertTrue($0.count > 0)
             }.catch { _ in
                 XCTFail("Unable to fetch location")
             }.finally {

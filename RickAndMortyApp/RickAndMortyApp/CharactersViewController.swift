@@ -10,20 +10,10 @@ import Kingfisher
 import UIKit
 import PromiseKit
 
-class CharactersViewController: UITableViewController {
-    var characters: [CharacterDetails] = []
+class CharactersViewController: AbstractCharactersViewController {
     var isLoading = false
     var page: Int = 0
-    var selectedCharacter: CharacterDetails?
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if let destination = segue.destination as? CharacterDetailsViewController {
-            destination.character = selectedCharacter
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchNextPage()
@@ -34,22 +24,12 @@ class CharactersViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let index = indexPath.row
-        
         // Fetch the next page if user scrolls to the end
-        if index == (characters.count - 1), isLoading == false {
+        if indexPath.row == (characters.count - 1), isLoading == false {
             fetchNextPage()
         }
         
-        // Configure cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterCell", for: indexPath) as! CharacterCell
-        cell.configure(for: characters[index])
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCharacter = characters[indexPath.row]
-        performSegue(withIdentifier: "CharacterDetailsSegue", sender: nil)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 }
 

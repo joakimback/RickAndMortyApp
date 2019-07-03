@@ -229,6 +229,101 @@ public final class FetchLocationQuery: GraphQLQuery {
   }
 }
 
+public final class FetchLocationResidentsQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query FetchLocationResidents($id: ID = 1) {\n  location(id: $id) {\n    __typename\n    ...LocationResidents\n  }\n}"
+
+  public var queryDocument: String { return operationDefinition.appending(LocationResidents.fragmentDefinition).appending(CharacterDetails.fragmentDefinition) }
+
+  public var id: GraphQLID?
+
+  public init(id: GraphQLID? = nil) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("location", arguments: ["id": GraphQLVariable("id")], type: .object(Location.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(location: Location? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "location": location.flatMap { (value: Location) -> ResultMap in value.resultMap }])
+    }
+
+    /// Get a specific locations by ID
+    public var location: Location? {
+      get {
+        return (resultMap["location"] as? ResultMap).flatMap { Location(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "location")
+      }
+    }
+
+    public struct Location: GraphQLSelectionSet {
+      public static let possibleTypes = ["Location"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(LocationResidents.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var locationResidents: LocationResidents {
+          get {
+            return LocationResidents(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
 public struct LocationDetails: GraphQLFragment {
   public static let fragmentDefinition =
     "fragment LocationDetails on Location {\n  __typename\n  id\n  name\n  type\n  dimension\n  residents {\n    __typename\n    id\n  }\n}"
@@ -347,6 +442,97 @@ public struct LocationDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "id")
+      }
+    }
+  }
+}
+
+public struct LocationResidents: GraphQLFragment {
+  public static let fragmentDefinition =
+    "fragment LocationResidents on Location {\n  __typename\n  residents {\n    __typename\n    ...CharacterDetails\n  }\n}"
+
+  public static let possibleTypes = ["Location"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("residents", type: .list(.object(Resident.selections))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(residents: [Resident?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Location", "residents": residents.flatMap { (value: [Resident?]) -> [ResultMap?] in value.map { (value: Resident?) -> ResultMap? in value.flatMap { (value: Resident) -> ResultMap in value.resultMap } } }])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// List of characters who have been last seen in the location.
+  public var residents: [Resident?]? {
+    get {
+      return (resultMap["residents"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Resident?] in value.map { (value: ResultMap?) -> Resident? in value.flatMap { (value: ResultMap) -> Resident in Resident(unsafeResultMap: value) } } }
+    }
+    set {
+      resultMap.updateValue(newValue.flatMap { (value: [Resident?]) -> [ResultMap?] in value.map { (value: Resident?) -> ResultMap? in value.flatMap { (value: Resident) -> ResultMap in value.resultMap } } }, forKey: "residents")
+    }
+  }
+
+  public struct Resident: GraphQLSelectionSet {
+    public static let possibleTypes = ["Character"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(CharacterDetails.self),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var fragments: Fragments {
+      get {
+        return Fragments(unsafeResultMap: resultMap)
+      }
+      set {
+        resultMap += newValue.resultMap
+      }
+    }
+
+    public struct Fragments {
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var characterDetails: CharacterDetails {
+        get {
+          return CharacterDetails(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
       }
     }
   }

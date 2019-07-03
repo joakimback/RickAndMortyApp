@@ -8,6 +8,12 @@ fragment LocationDetails on Location {
     }
 }
 
+fragment LocationResidents on Location {
+    residents {
+        ...CharacterDetails
+    }
+}
+
 fragment CharacterDetails on Character {
     image
     name
@@ -34,5 +40,11 @@ query FetchCharacters($page: Int = 1) {
 query FetchLocation($id: ID = 1) {
     location(id: $id) {
         ...LocationDetails
+    }
+}
+
+query FetchLocationResidents($id: ID = 1) {
+    location(id: $id) {
+        ...LocationResidents
     }
 }
