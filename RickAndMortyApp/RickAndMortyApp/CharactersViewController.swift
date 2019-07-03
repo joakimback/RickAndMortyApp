@@ -30,7 +30,7 @@ class CharactersViewController: AbstractCharactersViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Fetch the next page if user scrolls to the end
+        // Fetch the next page if the user scrolls to the end
         if indexPath.row == (characters.count - 1), isLoading == false, allowNextPage {
             fetchNextPage()
         }
@@ -52,7 +52,7 @@ extension CharactersViewController {
             Service.shared.fetchCharacters(for: page)
         }.done { characters in
             self.characters = self.characters + characters
-            self.allowNextPage = characters.count > 0
+            self.allowNextPage = characters.count > 0 // If result is empty, assume that there are no more pages
         }.catch { error in
             // Handle errors
         }.finally {

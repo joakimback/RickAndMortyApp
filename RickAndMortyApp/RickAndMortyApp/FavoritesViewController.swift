@@ -25,9 +25,12 @@ class FavoritesViewController: AbstractCharactersViewController {
         if editingStyle == .delete {
             let index = indexPath.row
             let characterID = FavoritesController.shared.favorites[index]
+            
+            // Prepare list of favorites and update local copy
             FavoritesController.shared.remove(id: characterID)
             characters.remove(at: index)
             
+            // Remove from table to sync with data
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .bottom)
             tableView.endUpdates()
