@@ -26,6 +26,7 @@
 		569D17D822CA886A005259A2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D17D722CA886A005259A2 /* Service.swift */; };
 		569D17DB22CAAC13005259A2 /* ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D17DA22CAAC13005259A2 /* ServiceTests.swift */; };
 		569D17DD22CB81BD005259A2 /* CharacterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D17DC22CB81BD005259A2 /* CharacterDetailsViewController.swift */; };
+		D3A98BFD0BD7D5CEF5B783D7 /* Pods_RickAndMortyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569BFC4E22CD3028002FC78D /* Pods_RickAndMortyApp.framework */; };
 		DD74A2CB3E0C351143F6DB8C /* Pods_RickAndMortyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE294F4E66A909F359AAE31 /* Pods_RickAndMortyAppTests.framework */; };
 		E661E78F57EE31BC18E6F40F /* Pods_RickAndMortyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FEB993807F2E108AEDAEB6 /* Pods_RickAndMortyApp.framework */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E661E78F57EE31BC18E6F40F /* Pods_RickAndMortyApp.framework in Frameworks */,
+				D3A98BFD0BD7D5CEF5B783D7 /* Pods_RickAndMortyApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

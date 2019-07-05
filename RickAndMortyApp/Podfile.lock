@@ -2,7 +2,7 @@ PODS:
   - Apollo (0.10.1):
     - Apollo/Core (= 0.10.1)
   - Apollo/Core (0.10.1)
-  - Kingfisher (5.6.0)
+  - Kingfisher (5.7.0)
   - PromiseKit (6.10.0):
     - PromiseKit/CorePromise (= 6.10.0)
     - PromiseKit/Foundation (= 6.10.0)
@@ -26,9 +26,9 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Apollo: 4d690a9b2e48e8820182df4b988d7a253e1ee589
-  Kingfisher: 1a50df6880a60bae26f3e21a0df3d17b892f5e0b
+  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
 
-PODFILE CHECKSUM: 8ec18374c21a99e1572cac70dba959635e5b542a
+PODFILE CHECKSUM: cd4976634e4635c38bcf47cad0facaab9baba6f4
 
 COCOAPODS: 1.6.1
