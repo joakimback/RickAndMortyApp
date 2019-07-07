@@ -18,11 +18,10 @@ and run 'pod install'
 
 # Third party plugins
 
-This project uses 
-Apollo for GraphQL integration, 
-PromiseKit for convenient asyncronous programming
-Kingfisher for loading remote images
-UIImageColors for detecting primary colors in images
+* Apollo for GraphQL integration, 
+* PromiseKit for convenient asyncronous programming
+* Kingfisher for loading remote images
+* UIImageColors for detecting primary colors in images
 
 # Missing parts...
 
