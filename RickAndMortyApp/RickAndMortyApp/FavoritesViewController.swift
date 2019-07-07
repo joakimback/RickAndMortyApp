@@ -24,10 +24,10 @@ class FavoritesViewController: AbstractCharactersViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let index = indexPath.row
-            let characterID = FavoritesController.shared.favorites[index]
+            let characterID = Favorites.shared.favorites[index]
             
             // Prepare list of favorites and update local copy
-            FavoritesController.shared.remove(id: characterID)
+            Favorites.shared.remove(characterID)
             characters.remove(at: index)
             
             // Remove from table to sync with data
@@ -40,7 +40,7 @@ class FavoritesViewController: AbstractCharactersViewController {
 
 extension FavoritesViewController {
     private func fetchFavorites() {
-        let characterIDs = FavoritesController.shared.favorites
+        let characterIDs = Favorites.shared.favorites
         
         firstly {
             Service.shared.fetchCharacters(for: characterIDs)

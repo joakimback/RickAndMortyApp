@@ -13,26 +13,37 @@ extension Notification.Name {
     static let favoritesDidChange = Notification.Name("favoritesDidChange")
 }
 
-class FavoritesController {
-    static let shared = FavoritesController()
+class Favorites {
+    static let shared = Favorites()
     
     var favorites: [GraphQLID] = []
     
-    func add(id: GraphQLID) {
+    func contains(_ id: GraphQLID) -> Bool {
+        return favorites.contains(id)
+    }
+    
+    func toggle(_ id: GraphQLID) {
+        if contains(id) {
+            remove(id)
+        } else {
+            add(id)
+        }
+    }
+    
+    func remove(_ id: GraphQLID) {
+        favorites = favorites.filter { $0 != id }
+        
+        // Notify observers
+        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
+    }
+}
+
+private extension Favorites {
+    func add(_ id: GraphQLID) {
         favorites.append(id)
         
         // Notify observers
         NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
-    
-    func remove(id: GraphQLID) {
-        favorites = favorites.filter { $0 != id }
 
-        // Notify observers
-        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
-    }
-    
-    func contains(id: GraphQLID) -> Bool {
-        return favorites.contains(id)
-    }
 }

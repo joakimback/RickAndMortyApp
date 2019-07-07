@@ -13,7 +13,7 @@
 		569BFC4522CBD194002FC78D /* AbstractCharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4422CBD194002FC78D /* AbstractCharactersViewController.swift */; };
 		569BFC4722CBD2B4002FC78D /* ResidentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4622CBD2B4002FC78D /* ResidentsViewController.swift */; };
 		569BFC4922CD18AF002FC78D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4822CD18AF002FC78D /* FavoritesViewController.swift */; };
-		569BFC4B22CD18C5002FC78D /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4A22CD18C5002FC78D /* FavoritesController.swift */; };
+		569BFC4B22CD18C5002FC78D /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC4A22CD18C5002FC78D /* Favorites.swift */; };
 		569BFC5522CD30FD002FC78D /* FavoriteControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569BFC5422CD30FD002FC78D /* FavoriteControllerTests.swift */; };
 		569D179E22CA7C8A005259A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D179D22CA7C8A005259A2 /* AppDelegate.swift */; };
 		569D17A022CA7C8A005259A2 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D179F22CA7C8A005259A2 /* CharactersViewController.swift */; };
@@ -53,7 +53,7 @@
 		569BFC4422CBD194002FC78D /* AbstractCharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCharactersViewController.swift; sourceTree = "<group>"; };
 		569BFC4622CBD2B4002FC78D /* ResidentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentsViewController.swift; sourceTree = "<group>"; };
 		569BFC4822CD18AF002FC78D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		569BFC4A22CD18C5002FC78D /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		569BFC4A22CD18C5002FC78D /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		569BFC4E22CD3028002FC78D /* Pods_RickAndMortyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_RickAndMortyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		569BFC5422CD30FD002FC78D /* FavoriteControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteControllerTests.swift; sourceTree = "<group>"; };
 		569D179A22CA7C8A005259A2 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +146,7 @@
 				569D17CF22CA850D005259A2 /* API.swift */,
 				569D17D722CA886A005259A2 /* Service.swift */,
 				569D179D22CA7C8A005259A2 /* AppDelegate.swift */,
-				569BFC4A22CD18C5002FC78D /* FavoritesController.swift */,
+				569BFC4A22CD18C5002FC78D /* Favorites.swift */,
 				569BFC4422CBD194002FC78D /* AbstractCharactersViewController.swift */,
 				569D179F22CA7C8A005259A2 /* CharactersViewController.swift */,
 				569D17DC22CB81BD005259A2 /* CharacterDetailsViewController.swift */,
@@ -310,6 +310,7 @@
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImageColors/UIImageColors.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -318,6 +319,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImageColors.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -339,7 +341,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n";
+			shellScript = "# APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\n# if [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\n# echo \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\n# exit 1\n# fi\n\n# cd \"${SRCROOT}/${TARGET_NAME}\"\n# $APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n";
 		};
 		BAE2CE474B1E3AEB155AB512 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -403,7 +405,7 @@
 				569D179E22CA7C8A005259A2 /* AppDelegate.swift in Sources */,
 				569BFC4722CBD2B4002FC78D /* ResidentsViewController.swift in Sources */,
 				569BFC4522CBD194002FC78D /* AbstractCharactersViewController.swift in Sources */,
-				569BFC4B22CD18C5002FC78D /* FavoritesController.swift in Sources */,
+				569BFC4B22CD18C5002FC78D /* Favorites.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

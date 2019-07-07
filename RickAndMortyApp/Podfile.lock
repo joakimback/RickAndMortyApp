@@ -12,23 +12,27 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.10.0):
     - PromiseKit/CorePromise
+  - UIImageColors (2.1.0)
 
 DEPENDENCIES:
   - Apollo
   - Kingfisher
   - PromiseKit
+  - UIImageColors
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Apollo
     - Kingfisher
     - PromiseKit
+    - UIImageColors
 
 SPEC CHECKSUMS:
   Apollo: 4d690a9b2e48e8820182df4b988d7a253e1ee589
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
+  UIImageColors: d2ef3b0877d203cbb06489eeb78ea8b7788caabe
 
-PODFILE CHECKSUM: cd4976634e4635c38bcf47cad0facaab9baba6f4
+PODFILE CHECKSUM: 3f40a52ff1c10dabb3e9fa7f58b9febe73e9147b
 
 COCOAPODS: 1.6.1

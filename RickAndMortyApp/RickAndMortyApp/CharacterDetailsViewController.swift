@@ -9,6 +9,7 @@
 import Apollo
 import Foundation
 import Kingfisher
+import UIImageColors
 import PromiseKit
 import UIKit
 
@@ -20,6 +21,12 @@ class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    
+    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var shadeView: ShadeView!
+    @IBOutlet weak var letterpressView: LetterpressView!
+    
+    @IBOutlet var captionLabels: [UILabel]!
     
     var character: CharacterDetails!
     var selectedLocation: LocationDetails!
@@ -34,18 +41,7 @@ class CharacterDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = character.name
-        
-        if let url = character.imageURL {
-            imageView.kf.setImage(with: url)
-        }
-        
-        nameLabel.text = character.name
-        originLabel.text = character.origin?.name
-        originButton.isEnabled = character.origin?.id != nil
-        locationLabel.text = character.location?.name
-        locationButton.isEnabled = character.location?.id != nil
+        updateLabels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,12 +70,7 @@ class CharacterDetailsViewController: UIViewController {
             return
         }
         
-        if (FavoritesController.shared.contains(id: characterID)) {
-            FavoritesController.shared.remove(id: characterID)
-        } else {
-            FavoritesController.shared.add(id: characterID)
-        }
-        
+        Favorites.shared.toggle(characterID)
         updateFavoriteButton()
     }
 }
@@ -105,10 +96,57 @@ extension CharacterDetailsViewController {
             return
         }
         
-        if (FavoritesController.shared.contains(id: characterID)) {
+        if (Favorites.shared.contains(characterID)) {
             favoriteButton.image = #imageLiteral(resourceName: "726-star-selected")
         } else {
             favoriteButton.image = #imageLiteral(resourceName: "726-star")
         }
+    }
+    
+    private func updateLabels() {
+        title = character.name
+        
+        if let url = character.imageURL {
+            imageView.kf.setImage(with: url)
+            imageView.kf.setImage(with: url) { (result) in
+                guard let image = try? result.get().image else {
+                    return
+                }
+                
+                if let colors = image.getColors(quality: .low) {
+                    self.updateColors(from: colors)
+                }
+            }
+        }
+        
+        nameLabel.text = character.name
+        originLabel.text = character.origin?.name
+        originButton.isEnabled = character.origin?.id != nil
+        locationLabel.text = character.location?.name
+        locationButton.isEnabled = character.location?.id != nil
+    }
+    
+    private func updateColors(from colors: UIImageColors) {
+        nameLabel.textColor = colors.primary
+        originLabel.textColor = colors.primary
+        locationLabel.textColor = colors.primary
+        captionLabels.forEach { $0.textColor = colors.secondary }
+        cardView.backgroundColor = colors.background
+        originButton.tintColor = colors.detail
+        locationButton.tintColor = colors.detail
+        letterpressView.darkmode = colors.primary.brightness > colors.background.brightness
+        shadeView.darkmode = colors.primary.brightness > colors.background.brightness
+    }
+}
+
+extension Color {
+    var brightness: CGFloat {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        return brightness
     }
 }

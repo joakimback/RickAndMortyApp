@@ -13,7 +13,7 @@ class FavoriteControllerTests: XCTestCase {
     var observer: Any!
 
     override func setUp() {
-        FavoritesController.shared.favorites = []
+        Favorites.shared.favorites = []
     }
 
     override func tearDown() {
@@ -27,16 +27,16 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        FavoritesController.shared.add(id: "1")
+        Favorites.shared.add(id: "1")
         
         waitForExpectations(timeout: 10.0, handler: nil)
 
-        XCTAssert(FavoritesController.shared.favorites.count == 1)
-        XCTAssert(FavoritesController.shared.contains(id: "1"))
+        XCTAssert(Favorites.shared.favorites.count == 1)
+        XCTAssert(Favorites.shared.contains(id: "1"))
     }
     
     func testAddSecondFavorite() {
-        FavoritesController.shared.add(id: "1")
+        Favorites.shared.add(id: "1")
         
         let e = expectation(description: "Should notify")
         
@@ -44,17 +44,17 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        FavoritesController.shared.add(id: "2")
+        Favorites.shared.add(id: "2")
         
         waitForExpectations(timeout: 10.0, handler: nil)
         
-        XCTAssert(FavoritesController.shared.favorites.count == 2)
-        XCTAssert(FavoritesController.shared.contains(id: "1"))
-        XCTAssert(FavoritesController.shared.contains(id: "2"))
+        XCTAssert(Favorites.shared.favorites.count == 2)
+        XCTAssert(Favorites.shared.contains(id: "1"))
+        XCTAssert(Favorites.shared.contains(id: "2"))
     }
     
     func testRemoveFavorite() {
-        FavoritesController.shared.add(id: "1")
+        Favorites.shared.add(id: "1")
         
         let e = expectation(description: "Should notify")
         
@@ -62,11 +62,11 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        FavoritesController.shared.remove(id: "1")
+        Favorites.shared.remove(id: "1")
         
         waitForExpectations(timeout: 10.0, handler: nil)
         
-        XCTAssert(FavoritesController.shared.favorites.count == 0)
-        XCTAssertFalse(FavoritesController.shared.contains(id: "1"))
+        XCTAssert(Favorites.shared.favorites.count == 0)
+        XCTAssertFalse(Favorites.shared.contains(id: "1"))
     }
 }
