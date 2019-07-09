@@ -17,6 +17,13 @@ class Favorites {
     static let shared = Favorites()
     
     var favorites: [GraphQLID] = []
+
+    func add(_ id: GraphQLID) {
+        favorites.append(id)
+        
+        // Notify observers
+        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
+    }
     
     func contains(_ id: GraphQLID) -> Bool {
         return favorites.contains(id)
@@ -36,14 +43,4 @@ class Favorites {
         // Notify observers
         NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
     }
-}
-
-private extension Favorites {
-    func add(_ id: GraphQLID) {
-        favorites.append(id)
-        
-        // Notify observers
-        NotificationCenter.default.post(name: .favoritesDidChange, object: nil)
-    }
-
 }

@@ -27,16 +27,16 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        Favorites.shared.add(id: "1")
+        Favorites.shared.add("1")
         
         waitForExpectations(timeout: 10.0, handler: nil)
 
         XCTAssert(Favorites.shared.favorites.count == 1)
-        XCTAssert(Favorites.shared.contains(id: "1"))
+        XCTAssert(Favorites.shared.contains("1"))
     }
     
     func testAddSecondFavorite() {
-        Favorites.shared.add(id: "1")
+        Favorites.shared.add("1")
         
         let e = expectation(description: "Should notify")
         
@@ -44,17 +44,17 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        Favorites.shared.add(id: "2")
+        Favorites.shared.add("2")
         
         waitForExpectations(timeout: 10.0, handler: nil)
         
         XCTAssert(Favorites.shared.favorites.count == 2)
-        XCTAssert(Favorites.shared.contains(id: "1"))
-        XCTAssert(Favorites.shared.contains(id: "2"))
+        XCTAssert(Favorites.shared.contains("1"))
+        XCTAssert(Favorites.shared.contains("2"))
     }
     
     func testRemoveFavorite() {
-        Favorites.shared.add(id: "1")
+        Favorites.shared.add("1")
         
         let e = expectation(description: "Should notify")
         
@@ -62,11 +62,11 @@ class FavoriteControllerTests: XCTestCase {
             e.fulfill()
         }
         
-        Favorites.shared.remove(id: "1")
+        Favorites.shared.remove("1")
         
         waitForExpectations(timeout: 10.0, handler: nil)
         
         XCTAssert(Favorites.shared.favorites.count == 0)
-        XCTAssertFalse(Favorites.shared.contains(id: "1"))
+        XCTAssertFalse(Favorites.shared.contains("1"))
     }
 }
